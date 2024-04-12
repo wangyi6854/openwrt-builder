@@ -5,7 +5,8 @@ cd openwrt
 
 
 # Updating Sources with Git
-git pull
+git pull || git clone https://github.com/openwrt/openwrt.git .
+git checkout $(git tag | grep -v "rc" | sort -V | tail -n 1)
 
 
 # Updating Feeds
@@ -28,14 +29,14 @@ make defconfig
 make menuconfig
 
 # download all dependency source files before final make, enables multi-core compilation
-make download
+make -j$(nproc) download
 
 # save your changes in the text file mydiffconfig
 ./scripts/diffconfig.sh >mydiffconfig
 
 
 # Building Images
-make V=s 2>&1 | tee build.log
+make -j$(nproc) V=s 2>&1 | tee build.log
 
 
 # Cleaning Up
