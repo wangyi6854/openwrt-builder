@@ -9,8 +9,21 @@ Just run run.bat under windows.
 run.bat
 ```
 
+Or under linux.
+
+```Bash
+bash run.sh
+```
+
+
 If you want keep the source outside from the docker container, append the source directory to the end of the command line. Like this:
 
 ```Shell
 run.bat /path/to/source
+```
+
+Or
+
+```Shell
+bash run.sh /path/to/source
 ```
