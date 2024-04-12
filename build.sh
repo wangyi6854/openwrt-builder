@@ -40,8 +40,8 @@ make -j$(nproc) V=s 2>&1 | tee build.log
 
 
 # Cleaning Up
-make clean
-make dirclean
-make distclean
+#make clean
+#make dirclean
+#make distclean
 
 
