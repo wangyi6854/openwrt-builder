@@ -8,4 +8,4 @@ IF [%1]==[] (
 
 docker build -t openwrt_builder .
 
-docker run %map_openwrt_location% -t openwrt_builder bash build.sh
+docker run %map_openwrt_location% -it openwrt_builder bash build.sh
