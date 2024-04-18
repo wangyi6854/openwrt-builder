@@ -1,12 +1,10 @@
 #!/bin/sh
 
-if [ -z "$1" ]; then
-    set map_openwrt_location=-v openwrt_builder:/home/user/openwrt
-else
-    set map_openwrt_location=-v $1:/home/user/openwrt
+if [[ ! -z "$1" ]]; then
+    docker volume create --driver local --name openwrt_builder --opt type=none --opt device=$1 --opt o=uid=root,gid=root --opt o=bind
 fi
 
 
 docker build -t openwrt_builder .
 
-docker run $map_openwrt_location -it openwrt_builder bash build.sh
+docker run -v openwrt_builder:/home/user/openwrt -it openwrt_builder bash build.sh

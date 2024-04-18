@@ -27,3 +27,5 @@ Or
 ```Shell
 bash run.sh /path/to/source
 ```
+
+Please DO NOT use relevant path. If you pass relevant path, add $(PWD) to it.
