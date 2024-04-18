@@ -1,11 +1,9 @@
 @echo off
 
-IF [%1]==[] (
-    set map_openwrt_location=-v openwrt_builder:/home/user/openwrt
-) ELSE (
-    set map_openwrt_location=-v %1:/home/user/openwrt
+IF not [%1]==[] (
+    docker volume create --driver local --name openwrt_builder --opt type=none --opt device="%1" --opt o=uid=root,gid=root --opt o=bind
 )
 
 docker build -t openwrt_builder .
 
-docker run %map_openwrt_location% -it openwrt_builder bash build.sh
+docker run -v openwrt_builder:/home/user/openwrt -it openwrt_builder bash build.sh
