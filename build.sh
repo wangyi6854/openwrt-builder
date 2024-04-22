@@ -3,11 +3,12 @@
 
 cd openwrt
 
+make clean
 
 # Updating Sources with Git
 git pull || git clone https://github.com/openwrt/openwrt.git .
 git checkout $(git tag | grep -v "rc" | sort -V | tail -n 1)
-
+#git checkout master
 
 # Updating Feeds
 ./scripts/feeds update -a

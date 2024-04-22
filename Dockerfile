@@ -1,17 +1,15 @@
-FROM debian:buster
+FROM rockylinux:9
 
-RUN apt-get update &&\
-    apt-get install -y \
-        sudo time git-core subversion build-essential g++ bash make \
-        libssl-dev patch libncurses5 libncurses5-dev zlib1g-dev gawk \
-        flex gettext wget unzip xz-utils python python-distutils-extra \
-        python3 python3-distutils-extra python3-setuptools swig rsync curl \
-        libsnmp-dev liblzma-dev libpam0g-dev cpio rsync gcc-multilib && \
-    apt-get clean && \
-    useradd -m user && \
-    echo 'user ALL=NOPASSWD: ALL' > /etc/sudoers.d/user
+RUN dnf update -y
 
-USER user
+RUN dnf groupinstall -y "Development Tools"
+
+RUN dnf install -y \
+        bzip2 gcc gcc-c++ git make ncurses-devel patch \
+        rsync tar unzip wget which diffutils python3 perl-base \
+        perl-Data-Dumper perl-File-Compare perl-File-Copy perl-FindBin \
+        perl-IPC-Cmd perl-JSON-PP perl-Thread-Queue perl-Time-Piece perl-XML-Parser
+
 WORKDIR /home/user
 
 COPY build.sh /home/user/
