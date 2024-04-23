@@ -1,5 +1,6 @@
 #!/bin/sh -x
 
+export FORCE_UNSAFE_CONFIGURE=1
 
 cd openwrt
 
